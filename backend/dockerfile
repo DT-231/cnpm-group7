@@ -1,0 +1,28 @@
+FROM python:3.11-slim
+
+# Install netcat for database waiting and other utilities
+RUN apt-get update && apt-get install -y \
+    netcat-traditional \
+    postgresql-client \
+    gcc \
+    python3-dev \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy requirements file
+COPY requirements.txt .
+
+# Copy startup script to root to avoid volume mount issues
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Copy application code
+COPY . .
+
+# Expose port
+EXPOSE 8000
+
+# Run the startup script with sh
+CMD ["sh", "/start.sh"]
