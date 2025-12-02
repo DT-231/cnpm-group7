@@ -1,80 +1,57 @@
-import { Icons } from "./Icons";
-import AIChat from "../assets/AIChat.png";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-export default function Hero() {
+const Hero = () => {
   return (
-    <section className="pt-32 pb-20 bg-gradient-to-b from-blue-50 to-white overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <span className="inline-block py-1 px-3 rounded-full bg-blue-100 text-blue-700 text-xs font-bold tracking-wider uppercase">
-                AI-Powered Learning
-              </span>
-              <h1 className="text-5xl sm:text-6xl font-extrabold text-gray-900 leading-[1.15]">
-                Học tiếng Anh <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600">
-                  thông minh với AI
-                </span>
-              </h1>
-              <p className="text-lg text-gray-600 max-w-lg leading-relaxed">
-                Luyện nói qua chat, đánh giá phát âm tự động, sửa lỗi ngữ pháp
-                và gợi ý bài học cá nhân hóa dành riêng cho bạn.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap gap-4">
-              <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-4 rounded-xl shadow-xl shadow-blue-600/20 transition-transform hover:-translate-y-1">
-                Bắt đầu học ngay
-              </button>
-              <button className="bg-white hover:bg-gray-50 text-gray-700 border border-gray-200 font-semibold px-8 py-4 rounded-xl transition-all hover:shadow-lg">
-                Xem demo
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-8">
-              {/* Card 1 */}
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <p className="text-sm font-semibold text-gray-700 mb-1">
-                  Học viên
-                </p>
-                <p className="text-3xl font-bold text-blue-600">500+</p>
-              </div>
-
-              {/* Card 2 */}
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <p className="text-sm font-semibold text-gray-700 mb-1">
-                  Bài luyện
-                </p>
-                <p className="text-3xl font-bold text-blue-600">10,000+</p>
-              </div>
-
-              {/* Card 3 */}
-              <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <p className="text-sm font-semibold text-gray-700 mb-1">
-                  Hài lòng
-                </p>
-                <p className="text-3xl font-bold text-blue-600">95%</p>
-              </div>
-            </div>
+    <section className="bg-gradient-to-b from-[#dbeafe] to-[#f6f6f8] dark:from-[#1e293b] dark:to-[#101622] py-20 sm:py-28">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid md:grid-cols-5 gap-16 items-center">
+        <div className="md:col-span-3 space-y-8">
+          <div className="space-y-4">
+            <h1 className="text-slate-900 dark:text-white text-4xl md:text-6xl font-black leading-tight tracking-tighter">
+              Học tiếng Anh thông minh với AI
+            </h1>
+            <p className="text-slate-600 dark:text-slate-300 text-lg md:text-xl font-normal leading-normal">
+              Luyện nói qua chat, đánh giá phát âm tự động, sửa lỗi ngữ pháp, gợi ý bài học cá nhân hóa.
+            </p>
+          </div>
+          
+          <div className="flex flex-wrap gap-4">
+            <Link to="/practice" className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-blue-600 text-white text-base font-bold shadow-lg shadow-blue-600/30 hover:bg-blue-600/90 transition-all">
+              Bắt đầu học ngay
+            </Link>
+            <a href="#features" className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-base font-bold border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">
+              Xem demo
+            </a>
           </div>
 
-          <div className="relative">
-            <div className="absolute -inset-4 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 blur-3xl animate-pulse"></div>
-            <img
-              src={AIChat}
-              alt="AI Robot"
-              className="relative w-full max-w-lg mx-auto rounded-2xl shadow-2xl border-4 border-white transform rotate-1 hover:rotate-0 transition-transform duration-500"
-            />
-            <div
-              className="absolute top-10 -left-6 bg-white p-4 rounded-xl shadow-xl border border-gray-100 hidden md:block animate-bounce"
-              style={{ animationDuration: "3s" }}
-            >
-              <Icons.Chat />
-            </div>
+          <div className="flex flex-wrap gap-4 pt-6">
+            {[
+              { label: 'Học viên', val: '500+' },
+              { label: 'Bài luyện', val: '10,000+' },
+              { label: 'Hài lòng', val: '95%' }
+            ].map((stat, idx) => (
+              <div key={idx} className="flex min-w-[158px] flex-1 flex-col gap-1 rounded-lg p-4 bg-white/50 dark:bg-slate-800/50 border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm">
+                <p className="text-slate-900 dark:text-white text-base font-medium">{stat.label}</p>
+                <p className="text-blue-600 tracking-light text-3xl font-bold">{stat.val}</p>
+              </div>
+            ))}
           </div>
+        </div>
+
+        <div className="md:col-span-2 relative flex items-center justify-center">
+          <img 
+            className="rounded-xl shadow-2xl w-full h-auto object-cover aspect-square" 
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1000&auto=format&fit=crop" 
+            alt="AI Learning" 
+          />
+          {/* Floating Icons */}
+          <div className="absolute -top-8 -left-8 w-16 h-16 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center text-4xl animate-bounce">💬</div>
+          <div className="absolute -bottom-6 -right-6 w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center text-4xl text-green-500 ">🎤</div>
+          <div className="absolute top-1/2 -translate-y-1/2 -right-10 w-16 h-16 bg-white dark:bg-slate-800 rounded-full shadow-lg flex items-center justify-center text-4xl text-purple-500">✍️</div>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default Hero;
