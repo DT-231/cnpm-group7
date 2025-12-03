@@ -1,18 +1,14 @@
-from pydantic import BaseModel, EmailStr
-from datetime import datetime
-from typing import Optional
+"""Backward-compatibility re-exports for Pydantic schemas.
 
-class UserBase(BaseModel):
-    username: str
-    email: EmailStr
+New code should import from `app.schemas.user` or `app.schemas.common`.
+"""
 
-class UserCreate(UserBase):
-    password: str
+from app.schemas.common import ResponseModel
+from app.schemas.user import UserBase, UserCreate, UserResponse
 
-class UserResponse(UserBase):
-    id: int
-    created_at: datetime
-    updated_at: Optional[datetime]
-
-    class Config:
-        from_attributes = True
+__all__ = [
+    "ResponseModel",
+    "UserBase",
+    "UserCreate",
+    "UserResponse",
+]

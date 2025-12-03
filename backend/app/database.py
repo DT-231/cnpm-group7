@@ -1,20 +1,25 @@
-from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-import os
+"""Backward-compatibility shims for legacy imports.
 
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    "postgresql://admin:admin123@postgres:5432/cnpm_db"
-)
+Prefer using `app.db.session` and `app.db.base` in new code.
+"""
 
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+from collections.abc import Generator
 
-Base = declarative_base()
+from sqlalchemy.orm import Session
 
-# Dependency
-def get_db():
+from app.db.base import Base
+from app.db.session import SessionLocal, engine
+
+__all__ = ["Base", "SessionLocal", "engine", "get_db"]
+
+
+def get_db() -> Generator[Session, None, None]:
+    """Yield a database session and ensure it is closed afterwards.
+
+    This mirrors the previous `get_db` dependency but delegates to the new
+    `SessionLocal` from `app.db.session`.
+    """
+
     db = SessionLocal()
     try:
         yield db
