@@ -16,7 +16,7 @@ const Hero = () => {
           </div>
           
           <div className="flex flex-wrap gap-4">
-            <Link to="/practice" className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-blue-600 text-white text-base font-bold shadow-lg shadow-blue-600/30 hover:bg-blue-600/90 transition-all">
+            <Link to="/practice-select" className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-blue-600 text-white text-base font-bold shadow-lg shadow-blue-600/30 hover:bg-blue-600/90 transition-all">
               Bắt đầu học ngay
             </Link>
             <a href="#features" className="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-white dark:bg-slate-800 text-slate-900 dark:text-white text-base font-bold border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors">

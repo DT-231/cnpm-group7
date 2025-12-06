@@ -13,7 +13,7 @@ const HomePage = () => {
       <Features />
       <HowItWorks />
       <Testimonials />
-      <CTA />
+      {!localStorage.getItem("token") && <CTA />}
     </>
   );
 };

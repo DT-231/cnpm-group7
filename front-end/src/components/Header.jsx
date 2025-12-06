@@ -7,16 +7,20 @@ const Header = () => {
 
   // Kiểm tra trạng thái đăng nhập khi component được load
   useEffect(() => {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = localStorage.getItem("token");
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
-  }, []);
+  }, [navigate]);
 
+  useEffect(()=>{
+
+  },[])
   const handleLogout = () => {
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     setUser(null);
     navigate("/");
+    window.location.reload();
   };
 
   return (

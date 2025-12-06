@@ -90,7 +90,7 @@ class AudioService:
             logger.info(f"Decoded audio size: {len(audio_bytes)} bytes ({len(audio_bytes) / 1024:.2f} KB)")
             
             # Create uploads directory if not exists
-            upload_dir = Path("uploads/audio")
+            upload_dir = Path("backend/audio")
             upload_dir.mkdir(parents=True, exist_ok=True)
             
             # Generate filename

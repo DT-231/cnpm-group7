@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // 1. Import hook chuyển trang
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { register } from '@/service/service';
 
 const SignUp = () => {
   const navigate = useNavigate(); // 2. Khởi tạo hook
@@ -16,7 +17,13 @@ const SignUp = () => {
     password: '',
     confirmPassword: '',
   });
-
+  useEffect(() => {
+    let token = localStorage.getItem("token")
+    if (token) {
+      navigate("/")
+    }
+  }, []
+)
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -34,6 +41,7 @@ const SignUp = () => {
 
     // Chuẩn bị dữ liệu (Backend hiện tại chỉ nhận username, email, password)
     const dataToSend = {
+      full_name: formData.fullname,
       username: formData.username,
       email: formData.email,
       password: formData.password,
@@ -42,20 +50,13 @@ const SignUp = () => {
     try {
       // 3. Gọi API thực tế
       // Đảm bảo URL này đúng với backend của bạn (mặc định là http://localhost:8000)
-      const response = await fetch('http://localhost:8000/api/users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(dataToSend),
-      });
+      const response = await register(dataToSend)
 
-      if (response.ok) {
+      if (response.success) {
         alert('Đăng ký thành công! Bạn có thể đăng nhập ngay.');
         navigate('/login'); // 4. Chuyển hướng về trang Login
       } else {
-        const errorData = await response.json();
-        alert(`Đăng ký thất bại: ${errorData.detail || 'Lỗi hệ thống'}`);
+        alert(response.message);
       }
     } catch (error) {
       console.error('Error:', error);
@@ -76,42 +77,42 @@ const SignUp = () => {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
-            
+
             <div className="space-y-2">
               <Label htmlFor="username">Tên người dùng</Label>
-              <Input id="username" name="username" type="text" placeholder="Tên đăng nhập" required onChange={handleChange}/>
+              <Input id="username" name="username" type="text" placeholder="Tên đăng nhập" required onChange={handleChange} />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="fullname">Họ và tên</Label>
-              <Input id="fullname" name="fullname" type="text" placeholder="Nhập họ và tên" required onChange={handleChange}/>
+              <Input id="fullname" name="fullname" type="text" placeholder="Nhập họ và tên" required onChange={handleChange} />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="email">Địa chỉ Email</Label>
-              <Input id="email" name="email" type="email" placeholder="email@example.com" required onChange={handleChange}/>
+              <Input id="email" name="email" type="email" placeholder="email@example.com" required onChange={handleChange} />
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="password">Mật khẩu</Label>
-              <Input id="password" name="password" type="password" placeholder="Mật khẩu" required onChange={handleChange}/>
+              <Input id="password" name="password" type="password" placeholder="Mật khẩu" required onChange={handleChange} />
             </div>
-            
+
             <div className="space-y-2">
               <Label htmlFor="confirmPassword">Xác nhận mật khẩu</Label>
-              <Input id="confirmPassword" name="confirmPassword" type="password" placeholder="Nhập lại mật khẩu" required onChange={handleChange}/>
+              <Input id="confirmPassword" name="confirmPassword" type="password" placeholder="Nhập lại mật khẩu" required onChange={handleChange} />
             </div>
 
             {/* Nút Submit có thêm trạng thái Loading */}
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               disabled={loading}
               className="w-full bg-blue-600 hover:bg-blue-700 font-semibold shadow-md shadow-blue-600/20 mt-6"
             >
               {loading ? 'Đang xử lý...' : 'Tạo Tài Khoản'}
             </Button>
           </form>
-          
+
           <div className="mt-6 text-center text-sm">
             <p className="text-zinc-500">
               Đã có tài khoản?{' '}

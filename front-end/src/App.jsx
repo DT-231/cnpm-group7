@@ -6,6 +6,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import HomePage from "./pages/HomePage";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import SelectSentencePage from "./pages/SelectSentencePage";
 import PronunciationPage from "./pages/PronunciationPage";
 import ChatPage from './pages/ChatPage';
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/signup" element={<SignUp />} />
         </Route>
 
+        <Route path="/practice-select" element={<SelectSentencePage />} />
         <Route path="/practice" element={<PronunciationPage />} />
         <Route path="/chat" element={<ChatPage />} />
       </Routes>

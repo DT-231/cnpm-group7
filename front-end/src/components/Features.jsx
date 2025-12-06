@@ -68,7 +68,7 @@ const Features = () => {
             colorClass="text-green-500"
             title="Luyện phát âm với AI"
             desc="Nói vào micro, AI chấm điểm ngay lập tức. Phản hồi chi tiết giúp bạn cải thiện từng âm tiết."
-            link="/practice"
+            link="/practice-select"
             linkText="Luyện tập"
             badge="MỚI"
             badgeColor="bg-green-500/10 text-green-500"
